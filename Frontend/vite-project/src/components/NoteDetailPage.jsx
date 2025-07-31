@@ -4,6 +4,7 @@ import axios from 'axios';
 import toast from 'react-hot-toast';
 
 const NoteDetailPage = () => {
+  const baseUrl = import.meta.env.VITE_API_URL;
   const { id } = useParams();
   const [note, setNote] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -11,7 +12,7 @@ const NoteDetailPage = () => {
   useEffect(() => {
     const fetchNote = async () => {
       try {
-        const res = await axios.get(`http://localhost:3000/api/v1/get/${id}`);
+        const res = await axios.get(`${baseUrl}/api/v1/get/${id}`);
         setNote(res.data.notes);
       } catch (error) {
         toast.error('Failed to fetch note');

@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
+import toast from 'react-hot-toast';
 
 const NotesList = () => {
+  const baseUrl = import.meta.env.VITE_API_URL;
   const [notes, setNotes] = useState([]);
   const [filterNotes, setFilterNotes] = useState([]);
   const [searchNotes, setSearchNotes] = useState('');
@@ -12,7 +14,7 @@ const NotesList = () => {
     const fetchNotes = async () => {
       try {
         const token = localStorage.getItem('token');
-        const res = await axios.get('http://localhost:3000/api/v1/get', {
+        const res = await axios.get(`${baseUrl}/api/v1/get`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -69,7 +71,7 @@ const NotesList = () => {
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {filterNotes.length > 0 ? (
+          {filterNotes?.length > 0 ? (
             filterNotes.map((note) => (
               <div
                 key={note._id}
