@@ -16,6 +16,20 @@ const CreateNotePage = () => {
   const navigate = useNavigate();
   const token = localStorage.getItem('token');
 
+    const fetchNotes = async () => {
+    try {
+      const res = await axios.get(`${baseUrl}/api/v1/get`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      setNotes(res.data);
+
+    } catch (error) {
+      toast.error('Failed to fetch notes');
+    } finally {
+      setLoading(false);
+    }
+  };
+
   useEffect(() => {
     if (!token) {
       toast.error('Unauthorized. Please login.');
@@ -24,19 +38,6 @@ const CreateNotePage = () => {
     fetchNotes();
   }, []);
 
-  const fetchNotes = async () => {
-    try {
-      const res = await axios.get(`${baseUrl}/api/v1/get`, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
-      setNotes(Array.isArray(res.data?.notes) ? res.data.notes : []);
-
-    } catch (error) {
-      toast.error('Failed to fetch notes');
-    } finally {
-      setLoading(false);
-    }
-  };
 
   const handleCreate = async () => {
     if (!title || !desc) return toast.error('Please fill in both fields');
@@ -46,7 +47,8 @@ const CreateNotePage = () => {
         { title, desc },
         { headers: { Authorization: `Bearer ${token}` } }
       );
-      setNotes([res.data.note, ...notes]);
+      setNotes(prev => [res.data.note, ...prev]);
+
       setTitle('');
       setDesc('');
       toast.success('Note created');

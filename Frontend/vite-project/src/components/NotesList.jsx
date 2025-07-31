@@ -11,26 +11,48 @@ const NotesList = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const fetchNotes = async () => {
-      try {
-        const token = localStorage.getItem('token');
-        const res = await axios.get(`${baseUrl}/api/v1/get`, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
-        setNotes(res.data.notes || []);
-        setFilterNotes(res.data.notes);
+//     const fetchNotes = async () => {
+//       try {
+//         const token = localStorage.getItem('token');
+//         const res = await axios.get(`${baseUrl}/api/v1/get`, {
+//           headers: {
+//             Authorization: `Bearer ${token}`,
+//           },
+//         });
+//         setNotes(res.data.notes || []);
+//         setFilterNotes(res.data.notes);
 
-      } catch (err) {
-        if (err.response?.status === 401) {
-            toast.error('Session expired. Please login.');
-            navigate('/login');
-}
+//       } catch (err) {
+//         if (err.response?.status === 401) {
+//             toast.error('Session expired. Please login.');
+//             navigate('/login');
+// }
 
-      }
-    };
-    fetchNotes();
+//       }
+//     };
+const fetchNotes = async () => {
+  try {
+    const token = localStorage.getItem('token');
+    const res = await axios.get(`${baseUrl}/api/v1/get`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    console.log("Fetched notes response:", res.data); // ✅ Debug log
+
+   setNotes(res.data || []);
+setFilterNotes(res.data || []);
+
+  } catch (err) {
+    console.error("Fetch error:", err);
+    if (err.response?.status === 401) {
+      toast.error('Session expired. Please login.');
+      navigate('/login');
+    }
+  }
+};
+    
+fetchNotes();
   }, []);
 
   useEffect(() => {
