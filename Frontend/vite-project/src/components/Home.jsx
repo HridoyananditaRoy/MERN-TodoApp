@@ -1,38 +1,3 @@
-// // src/pages/Home.jsx
-// import React from 'react';
-// import { Link, useNavigate } from 'react-router-dom';
-// import toast from 'react-hot-toast';
-
-// const Home = () => {
-//     const handleLogout = () => {
-//   // Clear user session info
-//   localStorage.removeItem('token');         // If you stored token
-//   localStorage.removeItem('user');          // If you stored user details
-
-//   toast.success('Logged out successfully');
-//   navigate('/login');                       // Or any other route
-// };
-
-//   return (
-//     <div className="min-h-screen flex flex-col items-center justify-center bg-black text-white">
-//       <h1 className="text-4xl font-bold mb-6">Welcome to DreamzTracker App</h1>
-//       <Link
-//         to="/create"
-//         className="bg-green-700 hover:bg-green-800 px-6 py-3 rounded text-white"
-//       >
-//         Create a New Note
-//       </Link>
-     
-//     </div>
-//   );
-// };
-
-// export default Home;
-
-
-
-
-
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';

@@ -5,6 +5,7 @@ import axios from 'axios';
 import toast from 'react-hot-toast';
 
 const CreateNotePage = () => {
+  const baseUrl = import.meta.env.VITE_API_URL;
   const [notes, setNotes] = useState([]);
   const [title, setTitle] = useState('');
   const [desc, setDesc] = useState('');
@@ -25,7 +26,7 @@ const CreateNotePage = () => {
 
   const fetchNotes = async () => {
     try {
-      const res = await axios.get('http://localhost:3000/api/v1/get', {
+      const res = await axios.get('${baseUrl}/api/v1/get', {
         headers: { Authorization: `Bearer ${token}` },
       });
       setNotes(res.data);
@@ -40,7 +41,7 @@ const CreateNotePage = () => {
     if (!title || !desc) return toast.error('Please fill in both fields');
     try {
       const res = await axios.post(
-        'http://localhost:3000/api/v1/create',
+        '${baseUrl}/api/v1/create',
         { title, desc },
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -57,7 +58,7 @@ const CreateNotePage = () => {
     if (!editId) return;
     try {
       const res = await axios.put(
-        `http://localhost:3000/api/v1/update/${editId}`,
+        `${baseUrl}/api/v1/update/${editId}`,
         { title, desc },
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -77,7 +78,7 @@ const CreateNotePage = () => {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`http://localhost:3000/api/v1/delete/${id}`, {
+      await axios.delete(`${baseUrl}/api/v1/delete/${id}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       setNotes(notes.filter((note) => note._id !== id));
