@@ -9,7 +9,7 @@ const jwt = require('jsonwebtoken');
 const getAllNotes = async (req, res) => {
   try {
     //Fetches only the authenticated user's notes.
-    const notes = await Note.find({userId: req.user.id}); // get only user's notes
+    const notes = await Note.find({userId: req.user.id}).sort({createdAt:-1}); // get only user's notes
     res.status(200).json(notes);
   } catch (error) {
     console.error("Error fetching notes:", error);

@@ -62,6 +62,13 @@ const Home = () => {
               <HomeIcon size={18} />
               Dashboard
             </Link>
+             <Link
+              to="/view-notes"
+              className="flex items-center gap-2 px-4 py-2 rounded hover:bg-gray-800 transition"
+            >
+              <HomeIcon size={18} />
+              View Notes
+            </Link>
 
             {/* <Link
               to="/create"

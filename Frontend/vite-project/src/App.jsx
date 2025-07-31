@@ -6,6 +6,7 @@ import CreateNotes from './components/CreateNotes';
 import NoteDetailPage from './components/NoteDetailPage';
 import Login from './components/Login';
 import Signup from './components/Signup';
+import NotesList from './components/NotesList';
 
 const App = () => {
   return (
@@ -39,6 +40,14 @@ const App = () => {
           </ProtectedRoute>
         }
       />
+      <Route
+       path='/view-notes'
+       element={
+        <ProtectedRoute>
+          <NotesList />
+        </ProtectedRoute>
+       }
+       />
     </Routes>
   );
 };
