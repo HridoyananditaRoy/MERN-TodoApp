@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 
 
 const Login = () => {
+  const baseUrl = import.meta.env.VITE_API_URL;
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
@@ -22,7 +23,7 @@ const Login = () => {
     }
 
     try {
-      const res = await axios.post('http://localhost:3000/api/v1/user/login', {
+      const res = await axios.post(`${baseUrl}/api/v1/user/login`, {
         email,
         password,
       });
