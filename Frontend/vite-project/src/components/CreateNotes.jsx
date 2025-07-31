@@ -26,7 +26,7 @@ const CreateNotePage = () => {
 
   const fetchNotes = async () => {
     try {
-      const res = await axios.get('${baseUrl}/api/v1/get', {
+      const res = await axios.get(`${baseUrl}/api/v1/get`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       setNotes(res.data.notes);
@@ -41,7 +41,7 @@ const CreateNotePage = () => {
     if (!title || !desc) return toast.error('Please fill in both fields');
     try {
       const res = await axios.post(
-        '${baseUrl}/api/v1/create',
+        `${baseUrl}/api/v1/create`,
         { title, desc },
         { headers: { Authorization: `Bearer ${token}` } }
       );

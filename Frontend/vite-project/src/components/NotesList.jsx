@@ -17,8 +17,9 @@ const NotesList = () => {
             Authorization: `Bearer ${token}`,
           },
         });
-        setNotes(res.data);
-        setFilterNotes(res.data);
+        setNotes(res.data.notes);
+        setFilterNotes(res.data.notes);
+
       } catch (err) {
         console.error('Fetch notes failed:', err.message);
       }

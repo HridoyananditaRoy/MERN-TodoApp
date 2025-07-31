@@ -12,7 +12,7 @@ const NoteDetailPage = () => {
     const fetchNote = async () => {
       try {
         const res = await axios.get(`http://localhost:3000/api/v1/get/${id}`);
-        setNote(res.data.note);
+        setNote(res.data.notes);
       } catch (error) {
         toast.error('Failed to fetch note');
       } finally {
