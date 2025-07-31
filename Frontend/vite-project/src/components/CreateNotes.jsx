@@ -29,7 +29,8 @@ const CreateNotePage = () => {
       const res = await axios.get(`${baseUrl}/api/v1/get`, {
         headers: { Authorization: `Bearer ${token}` },
       });
-      setNotes(res.data.notes);
+      setNotes(Array.isArray(res.data?.notes) ? res.data.notes : []);
+
     } catch (error) {
       toast.error('Failed to fetch notes');
     } finally {
